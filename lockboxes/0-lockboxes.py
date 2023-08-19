@@ -1,7 +1,12 @@
 #!/usr/bin/python3
-
+"""
+Method that determines if all the boxes can be opened.
+"""
 
 def canUnlockAll(boxes):
+    """
+    Main function
+    """
     opened_boxes = [False for i in range(len(boxes))]
     opened_boxes[0] = True
     box_index = 0
