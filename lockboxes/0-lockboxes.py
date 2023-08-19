@@ -13,11 +13,12 @@ def canUnlockAll(boxes):
     while box_index < len(boxes):
         if opened_boxes[box_index]:
             for key in boxes[box_index]:
-                if not opened_boxes[key] and box_index < key:
-                    opened_boxes[key] = True
-                elif not opened_boxes[key] and box_index > key:
-                    opened_boxes[key] = True
-                    box_index = key - 1
+                if key < len(boxes):
+                    if not opened_boxes[key] and box_index < key:
+                        opened_boxes[key] = True
+                    elif not opened_boxes[key] and box_index > key:
+                        opened_boxes[key] = True
+                        box_index = key - 1
 
         box_index += 1
 
