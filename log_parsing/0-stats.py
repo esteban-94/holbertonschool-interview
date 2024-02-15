@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Documentation determines if all the boxes can be opened.
-"""
+""" Docu determines if all the boxes can be opened. """
 
 
 import sys
@@ -13,9 +11,7 @@ i = 0
 counter = 0
 
 while True:
-    """
-    Documentation determines if all the boxes can be ope ned.
-    """
+    """ Documentation determines if all the boxes can be ope ned."""
 
     entrada = sys.stdin.readline()
     if re.match(patron_log, entrada):
