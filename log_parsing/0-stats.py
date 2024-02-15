@@ -6,13 +6,14 @@ print these statistics from the beginning: Total file size
 and number of lines by status code.
 excecute: ./0-generator.py | ./0-stats.py
 """
-
-
 import sys
 import re
 
 def print_metrics():
-    """Method to print the statistics from the beginning"""
+    """
+    Method to print the statistics from the beginning
+    """
+    
     patron_log = r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\s+-\s+\[\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}\.\d{6}\]\s+"GET\s+/projects/260\s+HTTP/1\.1"\s+\d{3}\s+\d+$'
     status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
     i = 0
