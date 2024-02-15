@@ -1,52 +1,59 @@
 #!/usr/bin/python3
 """
-Script that reads stdin line by line and computes metrics.
-After every 10 lines and/or a keyboard interruption (CTRL + C),
-print these statistics from the beginning: Total file size
-and number of lines by status code.
-excecute: ./0-generator.py | ./0-stats.py
+    script to log parsing
 """
+
 import sys
 import re
 
-def print_metrics():
-    """
-    Method to print the statistics from the beginning
-    """
 
-    patron_log = r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\s+-\s+\[\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}\.\d{6}\]\s+"GET\s+/projects/260\s+HTTP/1\.1"\s+\d{3}\s+\d+$'
-    status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
-    i = 0
-    counter = 0
-    """
-    Method to print the statistics from the beginning
-    """
-    while True:
-        """
-        Method to print the statistics from the beginning
-        """
-        entrada = sys.stdin.readline()
-        """
-        Method to print the statistics from the beginning
-        """
-        if re.match(patron_log, entrada):
-            """
-            Method to print the statistics from the beginning
-            """
-            current_status_code = int(entrada.split(" ")[7])
-            if current_status_code in status_codes:
-                status_codes[current_status_code] = status_codes[current_status_code] + 1
-                file_size = entrada.split(" ")[8]
-                counter = counter + int(file_size)
-                i = i + 1
-                if i == 10:
-                    i = 0
-                    print(f"File size: {counter}")
-                    for key, value in status_codes.items():
-                        if value != 0:
-                            print(f"{key}: {value}")
+total_size = 0
+count_line = 0
+count_status_code = {'200': 0,
+                     '301': 0,
+                     '400': 0,
+                     '401': 0,
+                     '403': 0,
+                     '404': 0,
+                     '405': 0,
+                     '500': 0
+                     }
+# pattern of line
+pattern = (r'^((?:\d{1,3}\.){3}\d{1,3}|[\w.-]+)\s*-\s*\[(.*?)\]'
+           r' "GET /projects/\d+ HTTP/1\.1" \d+ \d+$')
 
-print_metrics()
-"""
-Method to print the statistics from the beginning
-"""
+try:
+    for line in sys.stdin:
+
+        # check line
+        match = re.match(pattern, line)
+        if match:
+            count_line += 1
+            # split line
+            elements = line.split(" ")
+            # add size of total and determine status code
+            total_size += int(elements[-1])
+            status_code = elements[-2]
+            # increment count of status code
+            if status_code in count_status_code:
+                count_status_code[status_code] += 1
+
+            # print each 10 line
+            if count_line % 10 == 0:
+                print('File size: {}'.format(total_size))
+                # print in sorted order
+                for code, count_code in sorted(count_status_code.items()):
+                    if count_code != 0:
+                        print('{}: {}'.format(code, count_status_code[code]))
+                # reinitialized count line
+                count_line = 0
+
+except KeyboardInterrupt:
+    pass
+
+finally:
+    print('File size: {}'.format(total_size))
+    # print in sorted order
+    for code, count_code in sorted(count_status_code.items()):
+        if count_code != 0:
+            print('{}: {}'.format(code, count_status_code[code]))
