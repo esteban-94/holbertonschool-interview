@@ -1,5 +1,6 @@
+#!/usr/bin/python3
 """
-Documentation he is document
+Documentation
 """
 
 
@@ -12,6 +13,10 @@ i = 0
 counter = 0
 
 while True:
+    """
+    Documentation
+    """
+    
     entrada = sys.stdin.readline()
     if re.match(patron_log, entrada):
         current_status_code = int(entrada.split(" ")[7])
