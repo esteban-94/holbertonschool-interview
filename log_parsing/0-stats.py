@@ -1,7 +1,11 @@
 #!/usr/bin/python3
-""" Docu determines if all the boxes can be opened. """
-
-
+"""
+Script that reads stdin line by line and computes metrics.
+After every 10 lines and/or a keyboard interruption (CTRL + C),
+print these statistics from the beginning: Total file size
+and number of lines by status code.
+excecute: ./0-generator.py | ./0-stats.py
+"""
 import sys
 import re
 
@@ -11,8 +15,6 @@ i = 0
 counter = 0
 
 while True:
-    """ Documentation determines if all the boxes can be ope ned."""
-
     entrada = sys.stdin.readline()
     if re.match(patron_log, entrada):
         current_status_code = int(entrada.split(" ")[7])
