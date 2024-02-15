@@ -13,14 +13,26 @@ def print_metrics():
     """
     Method to print the statistics from the beginning
     """
-    
+
     patron_log = r'^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\s+-\s+\[\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}\.\d{6}\]\s+"GET\s+/projects/260\s+HTTP/1\.1"\s+\d{3}\s+\d+$'
     status_codes = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
     i = 0
     counter = 0
+    """
+    Method to print the statistics from the beginning
+    """
     while True:
+        """
+        Method to print the statistics from the beginning
+        """
         entrada = sys.stdin.readline()
+        """
+        Method to print the statistics from the beginning
+        """
         if re.match(patron_log, entrada):
+            """
+            Method to print the statistics from the beginning
+            """
             current_status_code = int(entrada.split(" ")[7])
             if current_status_code in status_codes:
                 status_codes[current_status_code] = status_codes[current_status_code] + 1
@@ -35,3 +47,6 @@ def print_metrics():
                             print(f"{key}: {value}")
 
 print_metrics()
+"""
+Method to print the statistics from the beginning
+"""
