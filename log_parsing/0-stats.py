@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Documentation
+Documentation determines if all the boxes can be opened.
 """
 
 
@@ -14,9 +14,9 @@ counter = 0
 
 while True:
     """
-    Documentation
+    Documentation determines if all the boxes can be ope ned.
     """
-    
+
     entrada = sys.stdin.readline()
     if re.match(patron_log, entrada):
         current_status_code = int(entrada.split(" ")[7])
